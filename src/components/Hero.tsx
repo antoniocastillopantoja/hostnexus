@@ -2,9 +2,11 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { SearchBar } from "./SearchBar";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Hero() {
   const [loaded, setLoaded] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     setLoaded(true);
@@ -32,13 +34,13 @@ export function Hero() {
           "heading-xl max-w-4xl text-balance mb-6 transition-all duration-1000",
           loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         )}>
-          Discover extraordinary places to stay
+          {t('hero.title')}
         </h1>
         <p className={cn(
           "text-xl md:text-2xl max-w-2xl text-balance mb-12 text-white/90 transition-all duration-1000 delay-100",
           loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         )}>
-          Find unique homes and experiences around the world
+          {t('hero.subtitle')}
         </p>
         
         <div className={cn(

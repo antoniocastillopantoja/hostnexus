@@ -1,47 +1,49 @@
 
 import { FacebookIcon, TwitterIcon, InstagramIcon, YoutubeIcon } from "lucide-react";
 import { AnimatedLogo } from "./AnimatedLogo";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
   
   const footerLinks = [
     {
-      title: "About",
+      title: t('footer.about'),
       links: [
-        { name: "How it works", href: "#" },
-        { name: "Newsroom", href: "#" },
-        { name: "Investors", href: "#" },
-        { name: "Careers", href: "#" },
-        { name: "Terms of Service", href: "#" }
+        { name: t('footer.howItWorks'), href: "#" },
+        { name: t('footer.newsroom'), href: "#" },
+        { name: t('footer.investors'), href: "#" },
+        { name: t('footer.careers'), href: "#" },
+        { name: t('footer.terms'), href: "#" }
       ]
     },
     {
-      title: "Community",
+      title: t('footer.community'),
       links: [
-        { name: "Diversity & Belonging", href: "#" },
-        { name: "Accessibility", href: "#" },
-        { name: "Referrals", href: "#" },
-        { name: "Gift cards", href: "#" }
+        { name: t('footer.diversity'), href: "#" },
+        { name: t('footer.accessibility'), href: "#" },
+        { name: t('footer.referrals'), href: "#" },
+        { name: t('footer.giftCards'), href: "#" }
       ]
     },
     {
-      title: "Host",
+      title: t('footer.host'),
       links: [
-        { name: "Host your home", href: "#" },
-        { name: "Host an experience", href: "#" },
-        { name: "Responsible hosting", href: "#" },
-        { name: "Resource center", href: "#" },
-        { name: "Community forum", href: "#" }
+        { name: t('footer.hostHome'), href: "#" },
+        { name: t('footer.hostExperience'), href: "#" },
+        { name: t('footer.responsibleHosting'), href: "#" },
+        { name: t('footer.resourceCenter'), href: "#" },
+        { name: t('footer.communityForum'), href: "#" }
       ]
     },
     {
-      title: "Support",
+      title: t('footer.support'),
       links: [
-        { name: "Help center", href: "#" },
-        { name: "Trust & Safety", href: "#" },
-        { name: "Cancellation options", href: "#" },
-        { name: "Neighborhood support", href: "#" }
+        { name: t('footer.helpCenter'), href: "#" },
+        { name: t('footer.trustSafety'), href: "#" },
+        { name: t('footer.cancellationOptions'), href: "#" },
+        { name: t('footer.neighborhoodSupport'), href: "#" }
       ]
     }
   ];
@@ -54,7 +56,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <AnimatedLogo className="mb-6" />
             <p className="text-gray-600 mb-6">
-              Find extraordinary places to stay and unique experiences all around the world.
+              {t('footer.description')}
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-gray-500 hover:text-gray-700 transition-colors">
@@ -94,17 +96,17 @@ export function Footer() {
         
         <div className="border-t border-gray-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
-            © {currentYear} HostNexus, Inc. All rights reserved.
+            © {currentYear} HostNexus, Inc. {t('footer.rights')}
           </p>
           <div className="flex gap-5 mt-4 md:mt-0">
             <a href="#" className="text-gray-500 hover:text-gray-900 text-sm transition-colors">
-              Privacy
+              {t('footer.privacy')}
             </a>
             <a href="#" className="text-gray-500 hover:text-gray-900 text-sm transition-colors">
-              Terms
+              {t('footer.terms')}
             </a>
             <a href="#" className="text-gray-500 hover:text-gray-900 text-sm transition-colors">
-              Sitemap
+              {t('footer.sitemap')}
             </a>
           </div>
         </div>

@@ -2,9 +2,121 @@
 import { useEffect, useState } from "react";
 import { PropertyCard } from "./PropertyCard";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 
-// Mock data
-const featuredProperties = [
+// Type for property data
+interface Property {
+  id: string;
+  title: string;
+  location: string;
+  price: number;
+  rating: number;
+  imageUrl: string;
+  isSuperHost?: boolean;
+}
+
+export function FeaturedProperties() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('properties')
+          .select('*')
+          .limit(8);
+
+        if (error) {
+          console.error('Error fetching properties:', error);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          // Map the data to our Property interface
+          const formattedProperties = data.map(item => ({
+            id: item.id,
+            title: item.title,
+            location: item.location,
+            price: parseFloat(item.price),
+            rating: 4.8 + Math.random() * 0.19, // Random rating between 4.8 and 4.99
+            imageUrl: item.image_url || "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=2070&auto=format&fit=crop",
+            isSuperHost: Math.random() > 0.5 // Random superhost status
+          }));
+          setProperties(formattedProperties);
+        } else {
+          // Fallback to mock data if no properties in database
+          setProperties(mockProperties);
+        }
+      } catch (error) {
+        console.error('Failed to fetch properties:', error);
+        setProperties(mockProperties);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProperties();
+    
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto">
+        <h2 className={cn(
+          "heading-lg mb-10 transition-all duration-700",
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        )}>
+          {t('featured.title')}
+        </h2>
+        
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+            {Array(8).fill(0).map((_, index) => (
+              <div key={index} className="animate-pulse">
+                <div className="rounded-xl bg-gray-200 h-72 mb-3"></div>
+                <div className="bg-gray-200 h-5 rounded w-3/4 mb-2"></div>
+                <div className="bg-gray-200 h-4 rounded w-1/2"></div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+            {properties.map((property, index) => (
+              <div
+                key={property.id}
+                className={cn(
+                  "transition-all duration-700",
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20",
+                  // Add staggered animation delays
+                  {
+                    "transition-delay-100": index % 4 === 0,
+                    "transition-delay-200": index % 4 === 1,
+                    "transition-delay-300": index % 4 === 2,
+                    "transition-delay-500": index % 4 === 3,
+                  }
+                )}
+              >
+                <PropertyCard property={property} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// Mock data as fallback
+const mockProperties = [
   {
     id: "1",
     title: "Modern Beachfront Villa",
@@ -74,49 +186,3 @@ const featuredProperties = [
     isSuperHost: true
   }
 ];
-
-export function FeaturedProperties() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 300);
-    
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto">
-        <h2 className={cn(
-          "heading-lg mb-10 transition-all duration-700",
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        )}>
-          Featured places to stay
-        </h2>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
-          {featuredProperties.map((property, index) => (
-            <div
-              key={property.id}
-              className={cn(
-                "transition-all duration-700",
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20",
-                // Add staggered animation delays
-                {
-                  "transition-delay-100": index % 4 === 0,
-                  "transition-delay-200": index % 4 === 1,
-                  "transition-delay-300": index % 4 === 2,
-                  "transition-delay-500": index % 4 === 3,
-                }
-              )}
-            >
-              <PropertyCard property={property} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}

@@ -1,12 +1,15 @@
 
 import { useState, useEffect } from "react";
-import { Search, User, Globe, Menu, X } from "lucide-react";
+import { Search, User, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AnimatedLogo } from "./AnimatedLogo";
+import { LanguageToggle } from "./LanguageToggle";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -30,13 +33,13 @@ export function Navbar() {
           {/* Search Bar - Desktop */}
           <div className="hidden md:flex items-center h-12 rounded-full border border-gray-200 shadow-subtle divide-x overflow-hidden animate-fade-in-up animation-delay-100">
             <button className="px-5 h-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-              Anywhere
+              {t('nav.anywhere')}
             </button>
             <button className="px-5 h-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-              Any week
+              {t('nav.anyweek')}
             </button>
             <button className="pl-5 pr-3 h-full flex items-center gap-2">
-              <span className="text-sm text-gray-500">Add guests</span>
+              <span className="text-sm text-gray-500">{t('nav.addguests')}</span>
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#0284C7] text-white">
                 <Search size={16} />
               </div>
@@ -45,8 +48,9 @@ export function Navbar() {
           
           {/* User Menu - Desktop */}
           <div className="hidden md:flex items-center gap-1 animate-fade-in-up animation-delay-200">
+            <LanguageToggle />
             <button className="p-3 rounded-full text-gray-700 hover:bg-gray-100 transition-colors">
-              <Globe size={18} />
+              <User size={18} />
             </button>
             <button className="flex items-center gap-2 p-2 pl-3 pr-2 rounded-full border shadow-subtle hover:shadow-md transition-all">
               <Menu size={16} />
@@ -57,12 +61,15 @@ export function Navbar() {
           </div>
           
           {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden p-2 rounded-full hover:bg-gray-100"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <LanguageToggle />
+            <button 
+              className="p-2 rounded-full hover:bg-gray-100"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
       
@@ -76,18 +83,18 @@ export function Navbar() {
             <div className="flex items-center gap-3">
               <Search size={20} />
               <div className="text-left">
-                <div className="text-sm font-medium">Where to?</div>
-                <div className="text-xs text-gray-500">Anywhere · Any week · Add guests</div>
+                <div className="text-sm font-medium">{t('nav.whereto')}</div>
+                <div className="text-xs text-gray-500">{t('nav.anywhere')} · {t('nav.anyweek')} · {t('nav.addguests')}</div>
               </div>
             </div>
           </button>
           
           <div className="flex flex-col divide-y">
-            <a href="#" className="py-4 text-lg">Home</a>
-            <a href="#" className="py-4 text-lg">Explore</a>
-            <a href="#" className="py-4 text-lg">Favorites</a>
-            <a href="#" className="py-4 text-lg">Profile</a>
-            <a href="#" className="py-4 text-lg">Help</a>
+            <a href="#" className="py-4 text-lg">{t('nav.home')}</a>
+            <a href="#" className="py-4 text-lg">{t('nav.explore')}</a>
+            <a href="#" className="py-4 text-lg">{t('nav.favorites')}</a>
+            <a href="#" className="py-4 text-lg">{t('nav.profile')}</a>
+            <a href="#" className="py-4 text-lg">{t('nav.help')}</a>
           </div>
         </div>
       </div>

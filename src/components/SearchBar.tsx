@@ -1,14 +1,16 @@
 
 import { useState } from "react";
 import { Search, MapPin, Calendar, Users } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function SearchBar() {
   const [activeTab, setActiveTab] = useState(0);
+  const { t } = useLanguage();
   
   const tabs = [
-    { name: "Where", icon: MapPin, placeholder: "Destination, city, address" },
-    { name: "When", icon: Calendar, placeholder: "Add dates" },
-    { name: "Who", icon: Users, placeholder: "Add guests" }
+    { name: t('search.where'), icon: MapPin, placeholder: t('search.destination') },
+    { name: t('search.when'), icon: Calendar, placeholder: t('search.dates') },
+    { name: t('search.who'), icon: Users, placeholder: t('search.guests') }
   ];
   
   return (
@@ -40,7 +42,7 @@ export function SearchBar() {
         <div className="p-3 bg-white">
           <button className="bg-[#0284C7] hover:bg-[#0369A1] transition-colors text-white rounded-lg h-14 px-6 flex items-center justify-center gap-2 font-medium">
             <Search size={18} />
-            <span>Search</span>
+            <span>{t('search.button')}</span>
           </button>
         </div>
       </div>
