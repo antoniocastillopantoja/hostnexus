@@ -20,13 +20,13 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 
 const loginSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email("Ingresa un correo electrónico válido"),
   password: z.string().min(6, "La contraseña debe tener al menos 6 caracteres"),
 });
 
 const registerSchema = z
   .object({
-    email: z.string().email(),
+    email: z.string().email("Ingresa un correo electrónico válido"),
     password: z.string().min(6, "La contraseña debe tener al menos 6 caracteres"),
     confirmPassword: z.string().min(6),
   })
@@ -64,12 +64,9 @@ const Auth = () => {
   const onLoginSubmit = async (values: LoginFormValues) => {
     try {
       await signIn(values.email, values.password);
-      toast({
-        title: "Inicio de sesión exitoso",
-        description: "Has iniciado sesión correctamente",
-      });
     } catch (error) {
       // Error already handled in AuthContext
+      console.error("Login error:", error);
     }
   };
 
@@ -79,6 +76,7 @@ const Auth = () => {
       setIsLogin(true); // Switch to login form after registration
     } catch (error) {
       // Error already handled in AuthContext
+      console.error("Registration error:", error);
     }
   };
 
