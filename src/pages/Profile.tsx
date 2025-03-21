@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -21,7 +21,7 @@ const Profile = () => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   // Fetch profile data
-  useState(() => {
+  useEffect(() => {
     const fetchProfile = async () => {
       if (!user) return;
       
@@ -44,7 +44,7 @@ const Profile = () => {
     };
     
     fetchProfile();
-  });
+  }, [user]); // Added dependency array
   
   // Update profile
   const handleUpdateProfile = async (e: React.FormEvent) => {
@@ -82,9 +82,11 @@ const Profile = () => {
   };
   
   // Redirect if not logged in
-  if (!isLoading && !user) {
-    return navigate("/auth");
-  }
+  useEffect(() => {
+    if (!isLoading && !user) {
+      navigate("/auth");
+    }
+  }, [isLoading, user, navigate]); // Fixed dependencies
   
   if (isLoading) {
     return (
@@ -92,6 +94,10 @@ const Profile = () => {
         <Loader2 className="h-8 w-8 animate-spin" />
       </div>
     );
+  }
+  
+  if (!user) {
+    return null; // Return null instead of undefined
   }
 
   return (
