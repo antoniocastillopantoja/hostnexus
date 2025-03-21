@@ -9,136 +9,13 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      event_registrations: {
-        Row: {
-          created_at: string
-          event_id: string
-          id: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          event_id: string
-          id?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          event_id?: string
-          id?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "event_registrations_event_id_fkey"
-            columns: ["event_id"]
-            isOneToOne: false
-            referencedRelation: "events"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      events: {
-        Row: {
-          attendees: number | null
-          capacity: number | null
-          created_at: string
-          date: string
-          description: string | null
-          featured: boolean | null
-          id: string
-          image_url: string | null
-          is_virtual: boolean | null
-          location: string | null
-          organizer_id: string
-          price: number | null
-          slug: string
-          tags: string[] | null
-          time: string
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          attendees?: number | null
-          capacity?: number | null
-          created_at?: string
-          date: string
-          description?: string | null
-          featured?: boolean | null
-          id?: string
-          image_url?: string | null
-          is_virtual?: boolean | null
-          location?: string | null
-          organizer_id: string
-          price?: number | null
-          slug: string
-          tags?: string[] | null
-          time: string
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          attendees?: number | null
-          capacity?: number | null
-          created_at?: string
-          date?: string
-          description?: string | null
-          featured?: boolean | null
-          id?: string
-          image_url?: string | null
-          is_virtual?: boolean | null
-          location?: string | null
-          organizer_id?: string
-          price?: number | null
-          slug?: string
-          tags?: string[] | null
-          time?: string
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      profiles: {
-        Row: {
-          avatar_url: string | null
-          created_at: string
-          full_name: string | null
-          id: string
-          updated_at: string
-          username: string | null
-          website: string | null
-        }
-        Insert: {
-          avatar_url?: string | null
-          created_at?: string
-          full_name?: string | null
-          id: string
-          updated_at?: string
-          username?: string | null
-          website?: string | null
-        }
-        Update: {
-          avatar_url?: string | null
-          created_at?: string
-          full_name?: string | null
-          id?: string
-          updated_at?: string
-          username?: string | null
-          website?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      generate_unique_slug: {
-        Args: {
-          title: string
-        }
-        Returns: string
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never
