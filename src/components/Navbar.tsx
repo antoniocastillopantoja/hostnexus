@@ -1,10 +1,12 @@
 
 import { useState, useEffect } from "react";
-import { Search, User, Menu, X } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AnimatedLogo } from "./AnimatedLogo";
 import { LanguageToggle } from "./LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { UserButton } from "./UserButton";
+import { Link } from "react-router-dom";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,7 +30,9 @@ export function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <AnimatedLogo />
+          <Link to="/">
+            <AnimatedLogo />
+          </Link>
           
           {/* Search Bar - Desktop */}
           <div className="hidden md:flex items-center h-12 rounded-full border border-gray-200 shadow-subtle divide-x overflow-hidden animate-fade-in-up animation-delay-100">
@@ -47,22 +51,15 @@ export function Navbar() {
           </div>
           
           {/* User Menu - Desktop */}
-          <div className="hidden md:flex items-center gap-1 animate-fade-in-up animation-delay-200">
+          <div className="hidden md:flex items-center gap-3 animate-fade-in-up animation-delay-200">
             <LanguageToggle />
-            <button className="p-3 rounded-full text-gray-700 hover:bg-gray-100 transition-colors">
-              <User size={18} />
-            </button>
-            <button className="flex items-center gap-2 p-2 pl-3 pr-2 rounded-full border shadow-subtle hover:shadow-md transition-all">
-              <Menu size={16} />
-              <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
-                <User size={16} />
-              </div>
-            </button>
+            <UserButton />
           </div>
           
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
             <LanguageToggle />
+            <UserButton />
             <button 
               className="p-2 rounded-full hover:bg-gray-100"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -90,11 +87,11 @@ export function Navbar() {
           </button>
           
           <div className="flex flex-col divide-y">
-            <a href="#" className="py-4 text-lg">{t('nav.home')}</a>
-            <a href="#" className="py-4 text-lg">{t('nav.explore')}</a>
-            <a href="#" className="py-4 text-lg">{t('nav.favorites')}</a>
-            <a href="#" className="py-4 text-lg">{t('nav.profile')}</a>
-            <a href="#" className="py-4 text-lg">{t('nav.help')}</a>
+            <Link to="/" className="py-4 text-lg" onClick={() => setMobileMenuOpen(false)}>{t('nav.home')}</Link>
+            <Link to="/explore" className="py-4 text-lg" onClick={() => setMobileMenuOpen(false)}>{t('nav.explore')}</Link>
+            <Link to="/favorites" className="py-4 text-lg" onClick={() => setMobileMenuOpen(false)}>{t('nav.favorites')}</Link>
+            <Link to="/profile" className="py-4 text-lg" onClick={() => setMobileMenuOpen(false)}>{t('nav.profile')}</Link>
+            <Link to="/help" className="py-4 text-lg" onClick={() => setMobileMenuOpen(false)}>{t('nav.help')}</Link>
           </div>
         </div>
       </div>
