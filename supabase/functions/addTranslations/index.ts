@@ -1,4 +1,3 @@
-
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.7.1'
 
@@ -80,6 +79,8 @@ serve(async (req) => {
 
     // Add more Spanish translations
     const spanishTranslations = [
+      { language: 'es', key: 'nav.home', value: 'Inicio' },
+      { language: 'es', key: 'nav.explore', value: 'Explorar' },
       { language: 'es', key: 'nav.favorites', value: 'Favoritos' },
       { language: 'es', key: 'nav.profile', value: 'Perfil' },
       { language: 'es', key: 'nav.help', value: 'Ayuda' },
@@ -87,6 +88,12 @@ serve(async (req) => {
       { language: 'es', key: 'nav.anyweek', value: 'Cualquier semana' },
       { language: 'es', key: 'nav.addguests', value: 'Agregar huéspedes' },
       { language: 'es', key: 'nav.whereto', value: '¿A dónde vas?' },
+      
+      { language: 'es', key: 'hero.title', value: 'Tu Hospedaje Ideal' },
+      { language: 'es', key: 'hero.subtitle', value: 'Encuentra hogares y experiencias únicas en todo el mundo' },
+      
+      { language: 'es', key: 'featured.title', value: 'Lugares destacados para hospedarte' },
+      { language: 'es', key: 'featured.subtitle', value: 'Explora nuestra selección de propiedades increíbles' },
       
       { language: 'es', key: 'search.where', value: 'Dónde' },
       { language: 'es', key: 'search.when', value: 'Cuándo' },
@@ -96,11 +103,29 @@ serve(async (req) => {
       { language: 'es', key: 'search.guests', value: 'Agregar huéspedes' },
       { language: 'es', key: 'search.button', value: 'Buscar' },
       
-      { language: 'es', key: 'footer.description', value: 'Encuentra lugares extraordinarios para hospedarte y experiencias únicas en todo el mundo.' },
+      { language: 'es', key: 'auth.signIn', value: 'Inicio de Sesión' },
+      { language: 'es', key: 'auth.signUp', value: 'Registrarse' },
+      { language: 'es', key: 'auth.email', value: 'Correo electrónico' },
+      { language: 'es', key: 'auth.password', value: 'Contraseña' },
+      { language: 'es', key: 'auth.confirmPassword', value: 'Confirmar contraseña' },
+      { language: 'es', key: 'auth.haveAccount', value: '¿Ya tienes una cuenta?' },
+      { language: 'es', key: 'auth.noAccount', value: '¿No tienes una cuenta?' },
+      { language: 'es', key: 'auth.admin', value: 'Administrador' },
+      { language: 'es', key: 'auth.host', value: 'Anfitrión' },
+      { language: 'es', key: 'auth.guest', value: 'Huésped' },
+      { language: 'es', key: 'auth.dashboard', value: 'Panel de control' },
+      { language: 'es', key: 'auth.profile', value: 'Mi perfil' },
+      { language: 'es', key: 'auth.signOut', value: 'Cerrar sesión' },
+      
       { language: 'es', key: 'footer.about', value: 'Acerca de' },
       { language: 'es', key: 'footer.community', value: 'Comunidad' },
       { language: 'es', key: 'footer.host', value: 'Anfitrión' },
       { language: 'es', key: 'footer.support', value: 'Soporte' },
+      { language: 'es', key: 'footer.description', value: 'Encuentra lugares extraordinarios para hospedarte y experiencias únicas en todo el mundo.' },
+      { language: 'es', key: 'footer.rights', value: 'Todos los derechos reservados.' },
+      { language: 'es', key: 'footer.privacy', value: 'Privacidad' },
+      { language: 'es', key: 'footer.terms', value: 'Términos' },
+      { language: 'es', key: 'footer.sitemap', value: 'Mapa del sitio' },
       { language: 'es', key: 'footer.howItWorks', value: 'Cómo funciona' },
       { language: 'es', key: 'footer.newsroom', value: 'Sala de prensa' },
       { language: 'es', key: 'footer.investors', value: 'Inversionistas' },
@@ -117,9 +142,7 @@ serve(async (req) => {
       { language: 'es', key: 'footer.helpCenter', value: 'Centro de ayuda' },
       { language: 'es', key: 'footer.trustSafety', value: 'Confianza y seguridad' },
       { language: 'es', key: 'footer.cancellationOptions', value: 'Opciones de cancelación' },
-      { language: 'es', key: 'footer.neighborhoodSupport', value: 'Soporte de vecindario' },
-      { language: 'es', key: 'footer.sitemap', value: 'Mapa del sitio' },
-      { language: 'es', key: 'footer.privacy', value: 'Privacidad' }
+      { language: 'es', key: 'footer.neighborhoodSupport', value: 'Soporte de vecindario' }
     ]
 
     // Insert English translations

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +22,7 @@ export function AnimatedLogo({ className }: AnimatedLogoProps) {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A] to-[#0284C7] rounded-lg transform transition-transform duration-700 hover:scale-110"></div>
           <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-sm">HS</div>
         </div>
-        <span className="font-semibold text-lg text-airbnb-blue-dark">HostNexus</span>
+        <span className="font-semibold text-lg text-airbnb-blue-dark">Tu Hospedaje Ideal</span>
       </div>
     </div>
   );

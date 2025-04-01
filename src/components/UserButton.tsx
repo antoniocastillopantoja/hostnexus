@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -15,14 +14,17 @@ import {
 
 export function UserButton() {
   const { user, userRoles, signOut } = useAuth();
-  const { t } = useLanguage();
+  const { t, translations } = useLanguage();
+
+  console.log('Current translations:', translations);
+  console.log('auth.signIn translation:', t('auth.signIn'));
 
   if (!user) {
     return (
       <Button asChild variant="outline" size="sm" className="rounded-full">
         <Link to="/auth">
           <User size={18} className="mr-2" />
-          {t("auth.signIn")}
+          {t('auth.signIn')}
         </Link>
       </Button>
     );

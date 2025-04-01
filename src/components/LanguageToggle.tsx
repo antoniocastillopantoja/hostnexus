@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Globe } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -18,7 +17,7 @@ export function LanguageToggle() {
       onClick={toggleLanguage}
     >
       <Globe size={18} />
-      <span className="text-sm font-medium">{language === 'en' ? 'ES' : 'EN'}</span>
+      <span className="text-sm font-medium">{language === 'es' ? 'EN' : 'ES'}</span>
     </Button>
   );
 }
